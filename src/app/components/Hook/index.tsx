@@ -28,10 +28,18 @@ export default () => {
   const [todos] = useState<TODO[]>(createTodo)
 
   useEffect(() => {
+    console.log('effect')
     document.title = `${count} times`
 
-    return () => (document.title = 'HOGE')
-  })
+    return () => {
+      console.log('clean up')
+      document.title = 'HOGE'
+    }
+  }, [count])
+
+  useEffect(() => {
+    console.log('run only once')
+  }, [])
 
   return (
     <div>

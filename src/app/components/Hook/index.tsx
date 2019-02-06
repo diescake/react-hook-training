@@ -1,7 +1,7 @@
 import { Footer } from '@/app/components/Footer'
 import words from '@/assets/strings'
 import * as React from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as key from 'weak-key'
 
 export namespace SFC {
@@ -26,6 +26,12 @@ const createTodo = () => [
 export default () => {
   const [count, setCount] = useState<number>(0)
   const [todos] = useState<TODO[]>(createTodo)
+
+  useEffect(() => {
+    document.title = `${count} times`
+
+    return () => (document.title = 'HOGE')
+  })
 
   return (
     <div>

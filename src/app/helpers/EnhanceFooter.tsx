@@ -14,9 +14,12 @@ export const EnhanceFooter = (ComposedComponent: React.ComponentType<Footer.Prop
     }
 
     render = () => (
-      <div>
+      <>
         <ComposedComponent />
-        <Link to="/">{words.example.name}</Link> | <Link to="/sfc">{words.sfc.name}</Link>
-      </div>
+        <div>
+          <Link to="/">{words.example.name}</Link> | <Link to="/sfc">{words.sfc.name}</Link> |{' '}
+          <Link to="/hook">{words.hook.name}</Link>
+        </div>
+      </>
     )
   }

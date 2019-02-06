@@ -1,3 +1,4 @@
+import Hook from '@/app/components/Hook'
 import SFC from '@/app/components/SFC'
 import Example from '@/app/containers/Example'
 import { configureStore } from '@/app/store'
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Example} />
         <Route exact path="/sfc" component={SFC} />
+        <Route exact path="/hook" component={Hook} />
         <Redirect to="/" />
       </Switch>
     </ConnectedRouter>

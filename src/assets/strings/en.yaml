@@ -5,6 +5,9 @@ example:
 sfc:
   name: sfc
   hello: Hello from TypeScript and framework!!!
+hook:
+  name: hook
+  hello: Hello my first React Hooks !!!
 footer:
   back: Back
   forward: Forward

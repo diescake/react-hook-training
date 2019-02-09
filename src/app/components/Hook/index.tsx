@@ -47,11 +47,6 @@ export default () => {
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>inclement</button>
       <br />
-      <label>Subject:</label>
-      <input type="text" />
-      <br />
-      <label>Text:</label>
-      <input type="text" />
       <ul>
         {todos.map((todo: TODO) => (
           <li key={key(todo)}>{`${todo.subject}: ${todo.text}`}</li>

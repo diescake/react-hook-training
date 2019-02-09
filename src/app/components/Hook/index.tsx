@@ -15,6 +15,32 @@ interface TODO {
   done: boolean
 }
 
+const useKeyEvent = (listener: any) => {
+  useEffect(() => {
+    console.log('keydown effect set')
+    document.addEventListener<'keydown'>('keydown', listener)
+
+    return () => {
+      console.log('keydown effect clean up')
+      document.removeEventListener('keydown', listener)
+    }
+  })
+}
+
+const useTitle = (count: number) => {
+  const [title] = useState<string>(document.title)
+
+  useEffect(() => {
+    console.log('title effect')
+    document.title = `${count} times`
+
+    return () => {
+      console.log('title clean up')
+      document.title = title
+    }
+  }, [count])
+}
+
 const createTodo = () => [
   {
     subject: `HOGE FOO ${Math.random()}`,
@@ -27,19 +53,10 @@ export default () => {
   const [count, setCount] = useState<number>(0)
   const [todos] = useState<TODO[]>(createTodo)
 
-  useEffect(() => {
-    console.log('effect')
-    document.title = `${count} times`
-
-    return () => {
-      console.log('clean up')
-      document.title = 'HOGE'
-    }
-  }, [count])
-
-  useEffect(() => {
-    console.log('run only once')
-  }, [])
+  useTitle(count)
+  useKeyEvent((e: KeyboardEvent) => {
+    console.log(e.key)
+  })
 
   return (
     <div>

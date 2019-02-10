@@ -33,18 +33,16 @@ const initialTodos: TODO[] = [
 const reducer = (state: TODO[] = initialTodos, action: AnyAction) => {
   switch (action.type) {
     case 'TOGGLE_CHECKBOX':
-      const targetTodo = state.find((todo: TODO) => todo.id === action.id)
-      if (!targetTodo) {
-        return state
-      }
+      return state.map((todo: TODO) => {
+        if (todo.id !== action.id) {
+          return todo
+        }
 
-      return [
-        ...state.filter((todo: TODO) => todo.id !== action.id),
-        {
-          ...targetTodo,
-          done: !targetTodo.done,
-        },
-      ]
+        return {
+          ...todo,
+          done: !todo.done,
+        }
+      })
     case 'ADD_TODO':
       return [...state, { id: uuidv4(), message: action.message, done: false }]
     default:

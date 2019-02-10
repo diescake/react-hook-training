@@ -27,18 +27,18 @@ const useKeyEvent = (listener: any) => {
   })
 }
 
-const useTitle = (count: number) => {
+const useTitle = (name: string) => {
   const [title] = useState<string>(document.title)
 
   useEffect(() => {
     console.log('title effect')
-    document.title = `${count} times`
+    document.title = name
 
     return () => {
       console.log('title clean up')
       document.title = title
     }
-  }, [count])
+  }, [name])
 }
 
 const createTodo = () => [
@@ -53,7 +53,7 @@ export default () => {
   const [count, setCount] = useState<number>(0)
   const [todos] = useState<TODO[]>(createTodo)
 
-  useTitle(count)
+  useTitle(`${count} times`)
   useKeyEvent((e: KeyboardEvent) => {
     console.log(e.key)
   })

@@ -52,6 +52,13 @@ const reducer = (state: TODO[] = initialTodos, action: AnyAction) => {
   }
 }
 
+const persistReducer = (state: TODO[] = initialTodos, action: AnyAction) => {
+  const nextState = reducer(state, action)
+  localStorage.setItem('todos', JSON.stringify(nextState))
+
+  return nextState
+}
+
 const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
   <li>
     <input type="checkbox" defaultChecked={todo.done} onChange={onChange} />
@@ -60,7 +67,17 @@ const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
 )
 
 export default () => {
-  const [state, dispatch] = useReducer(reducer, initialTodos)
+  const [state, dispatch] = useReducer(
+    persistReducer,
+    (() => {
+      const serializedTodos = localStorage.getItem('todos')
+      if (!serializedTodos) {
+        return initialTodos
+      }
+
+      return JSON.parse(serializedTodos)
+    })()
+  )
   const [message, setMessage] = useState<string>('')
 
   return (

@@ -2,6 +2,7 @@ import { Footer } from '@/app/components/Footer'
 import words from '@/assets/strings'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
+import { useToggle } from 'react-use'
 import * as key from 'weak-key'
 
 export namespace SFC {
@@ -58,11 +59,15 @@ export default () => {
     console.log(e.key)
   })
 
+  const [on, toggle] = useToggle(false)
+
+  // tslint:disable: no-unnecessary-callback-wrapper
   return (
     <div>
       <h1>{words.hook.hello}</h1>
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>inclement</button>
+      <button onClick={() => toggle()}>{on.toString()}</button>
       <br />
       <ul>
         {todos.map((todo: TODO) => (

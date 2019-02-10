@@ -1,6 +1,7 @@
 import words from '@/assets/strings'
 import * as React from 'react'
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
+import { AnyAction } from 'redux'
 import * as uuidv4 from 'uuid'
 import * as key from 'weak-key'
 import style from './style.scss'
@@ -29,25 +30,21 @@ const initialTodos: TODO[] = [
   },
 ]
 
-const toggleTargetDone = (id: string, todos: TODO[]) => {
-  const targetTodo = todos.find((todo: TODO) => todo.id === id)
-  if (!targetTodo) {
-    return todos
-  }
-
-  return [
-    ...todos.filter((todo: TODO) => todo.id !== id),
-    {
-      ...targetTodo,
-      done: !targetTodo.done,
-    },
-  ]
-}
-
-const reducer = (state: TODO[] = initialTodos, action: any) => {
+const reducer = (state: TODO[] = initialTodos, action: AnyAction) => {
   switch (action.type) {
     case 'TOGGLE_CHECKBOX':
-      return toggleTargetDone(action.id, state)
+      const targetTodo = state.find((todo: TODO) => todo.id === action.id)
+      if (!targetTodo) {
+        return state
+      }
+
+      return [
+        ...state.filter((todo: TODO) => todo.id !== action.id),
+        {
+          ...targetTodo,
+          done: !targetTodo.done,
+        },
+      ]
     case 'ADD_TODO':
       return [...state, { id: uuidv4(), message: action.message, done: false }]
     default:
@@ -65,8 +62,8 @@ const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
 )
 
 export default () => {
-  const [state, dispatch] = React.useReducer(reducer, initialTodos)
-  const [todoMessage, setTodoMessage] = useState<string>('')
+  const [state, dispatch] = useReducer(reducer, initialTodos)
+  const [message, setMessage] = useState<string>('')
 
   return (
     <div className={style.container}>
@@ -78,12 +75,22 @@ export default () => {
       </ul>
       <input
         className={style.inputTodo}
-        onChange={(e: any) => setTodoMessage(e.target.value)}
         type="text"
+        value={message}
         placeholder="Enter new TODO message."
-        value={todoMessage}
+        onChange={(e: any) => setMessage(e.target.value)}
       />
-      <button onClick={() => dispatch({ type: 'ADD_TODO', message: todoMessage })}>{words.todo.add}</button>
+      <button
+        onClick={() => {
+          if (!message) {
+            return
+          }
+          dispatch({ type: 'ADD_TODO', message })
+          setMessage('')
+        }}
+      >
+        {words.todo.add}
+      </button>
     </div>
   )
 }

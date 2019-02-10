@@ -2,7 +2,7 @@ import { Footer } from '@/app/components/Footer'
 import words from '@/assets/strings'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { useBattery, useToggle } from 'react-use'
+import { useBattery, useIdle, useToggle } from 'react-use'
 import * as key from 'weak-key'
 
 export namespace SFC {
@@ -61,6 +61,7 @@ export default () => {
 
   const [on, toggle] = useToggle(false)
   const batteryState = useBattery()
+  const isIdle = useIdle(3000)
 
   // tslint:disable: no-unnecessary-callback-wrapper
   return (
@@ -69,6 +70,7 @@ export default () => {
       <p>You clicked {count} times</p>
       <p>{`${batteryState.charging}`}</p>
       <p>{batteryState.chargingTime}</p>
+      <p>{`${isIdle}`}</p>
       <button onClick={() => setCount(count + 1)}>inclement</button>
       <button onClick={() => toggle()}>{on.toString()}</button>
       <br />

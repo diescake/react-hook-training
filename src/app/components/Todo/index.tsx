@@ -44,6 +44,19 @@ const toggleTargetDone = (id: string, todos: TODO[]) => {
   ]
 }
 
+const reducer = (state: TODO[] = initialTodos, action: any) => {
+  switch (action.type) {
+    case 'TOGGLE_CHECKBOX':
+      return toggleTargetDone(action.id, state)
+    case 'ADD_TODO':
+      return [...state, { id: uuidv4(), message: action.message, done: false }]
+    default:
+      console.error(`Unexpected type: ${action.type}`)
+
+      return state
+  }
+}
+
 const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
   <li>
     <input type="checkbox" defaultChecked={todo.done} onChange={onChange} />
@@ -52,15 +65,15 @@ const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
 )
 
 export default () => {
-  const [todos, setTodos] = useState<TODO[]>(initialTodos)
+  const [state, dispatch] = React.useReducer(reducer, initialTodos)
   const [todoMessage, setTodoMessage] = useState<string>('')
 
   return (
     <div className={style.container}>
       <h1>{words.todo.header}</h1>
       <ul>
-        {todos.map((todo: TODO) => (
-          <TODO key={key(todo)} todo={todo} onChange={() => setTodos(toggleTargetDone(todo.id, todos))} />
+        {state.map((todo: TODO) => (
+          <TODO key={key(todo)} todo={todo} onChange={() => dispatch({ type: 'TOGGLE_CHECKBOX', id: todo.id })} />
         ))}
       </ul>
       <input
@@ -70,7 +83,7 @@ export default () => {
         placeholder="Enter new TODO message."
         value={todoMessage}
       />
-      <button onClick={() => setTodos([...todos, { id: uuidv4(), message: todoMessage, done: false }])}>{words.todo.add}</button>
+      <button onClick={() => dispatch({ type: 'ADD_TODO', message: todoMessage })}>{words.todo.add}</button>
     </div>
   )
 }

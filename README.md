@@ -22,7 +22,7 @@ $ yarn build    # build and generate production codes
 - [React v16.8: The One With Hooks](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html)
 - [Introducing Hooks](https://reactjs.org/docs/hooks-intro.html)
 - [igata](https://github.com/diescake/igata) is adopted as boilerplates.
-- []
+- [hooks-by-example](https://github.com/latviancoder/hooks-by-example)
 
 ## License
 

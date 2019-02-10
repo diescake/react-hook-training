@@ -5,11 +5,6 @@ import { useEffect, useState } from 'react'
 import { useBattery, useIdle, useToggle } from 'react-use'
 import * as key from 'weak-key'
 
-export namespace SFC {
-  export interface Props {}
-  export interface State {}
-}
-
 interface TODO {
   subject: string
   text: string

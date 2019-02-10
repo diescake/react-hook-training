@@ -1,6 +1,6 @@
 import words from '@/assets/strings'
 import * as React from 'react'
-import { useReducer, useState } from 'react'
+import { useReducer, useRef, useState } from 'react'
 import { AnyAction } from 'redux'
 import * as uuidv4 from 'uuid'
 import * as key from 'weak-key'
@@ -80,6 +80,13 @@ export default () => {
   )
   const [message, setMessage] = useState<string>('')
 
+  const inputTextRef = useRef<HTMLInputElement>(null)
+  React.useLayoutEffect(() => {
+    if (inputTextRef && inputTextRef.current) {
+      inputTextRef.current.focus()
+    }
+  }, [])
+
   const addTodo = () => {
     if (!message) {
       return
@@ -97,6 +104,7 @@ export default () => {
         ))}
       </ul>
       <input
+        ref={inputTextRef}
         className={style.inputTodo}
         type="text"
         value={message}

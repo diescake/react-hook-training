@@ -55,7 +55,7 @@ export default () => {
   })
 
   const [on, toggle] = useToggle(false)
-  const batteryState = useBattery()
+  const batteryState: any = useBattery()
   const isIdle = useIdle(3000)
 
   // tslint:disable: no-unnecessary-callback-wrapper

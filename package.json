@@ -21,6 +21,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-logger": "^3.0.6",
     "@types/redux-saga": "^0.10.5",
+    "@types/uuid": "^3.4.4",
     "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^2.1.0",
     "file-loader": "^3.0.1",
@@ -59,6 +60,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.1",
+    "uuid": "^3.3.2",
     "weak-key": "^1.0.1"
   }
 }

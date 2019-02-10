@@ -57,7 +57,7 @@ const reducer = (state: TODO[] = initialTodos, action: AnyAction) => {
 const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
   <li>
     <input type="checkbox" defaultChecked={todo.done} onChange={onChange} />
-    <span className={style.todoMessage}>{todo.message}</span>
+    <span className={style.todoMessage}>{todo.done ? <s>{todo.message}</s> : todo.message}</span>
   </li>
 )
 

@@ -1,7 +1,14 @@
 .container {
   padding: 10px 20px;
+  line-height: 1.8;
 }
 
-.checkBox {
-  padding-right: 10px;
+.todoMessage {
+  margin-left: 10px;
+}
+
+.inputTodo {
+  padding-left: 8px;
+  margin: 0 5px 0 64px;
+  width: 400px;
 }

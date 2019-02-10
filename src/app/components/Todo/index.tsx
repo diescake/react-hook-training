@@ -54,17 +54,13 @@ export default () => {
       <ul>
         {todos.map((todo: TODO) => (
           <li key={key(todo)}>
-            <input
-              className={style.checkBox}
-              onChange={() => setTodos(toggleTargetDone(todo.id, todos))}
-              type="checkbox"
-              defaultChecked={todo.done}
-            />
-            {todo.message}
+            <input onChange={() => setTodos(toggleTargetDone(todo.id, todos))} type="checkbox" defaultChecked={todo.done} />
+            <span className={style.todoMessage}>{todo.message}</span>
           </li>
         ))}
       </ul>
       <input
+        className={style.inputTodo}
         onChange={(e: any) => setTodoMessage(e.target.value)}
         type="text"
         placeholder="Enter new TODO message."

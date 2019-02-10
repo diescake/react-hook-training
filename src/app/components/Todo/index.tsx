@@ -80,6 +80,14 @@ export default () => {
   )
   const [message, setMessage] = useState<string>('')
 
+  const addTodo = () => {
+    if (!message) {
+      return
+    }
+    dispatch({ type: 'ADD_TODO', message })
+    setMessage('')
+  }
+
   return (
     <div className={style.container}>
       <h1>{words.todo.header}</h1>
@@ -94,18 +102,9 @@ export default () => {
         value={message}
         placeholder="Enter new TODO message."
         onChange={(e: any) => setMessage(e.target.value)}
+        onKeyPress={(event: any) => event.key === 'Enter' && addTodo()}
       />
-      <button
-        onClick={() => {
-          if (!message) {
-            return
-          }
-          dispatch({ type: 'ADD_TODO', message })
-          setMessage('')
-        }}
-      >
-        {words.todo.add}
-      </button>
+      <button onClick={addTodo}>{words.todo.add}</button>
     </div>
   )
 }

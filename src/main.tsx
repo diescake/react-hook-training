@@ -1,5 +1,6 @@
 import Hook from '@/app/components/Hook'
 import SFC from '@/app/components/SFC'
+import Todo from '@/app/components/Todo'
 import Example from '@/app/containers/Example'
 import { configureStore } from '@/app/store'
 import { ConnectedRouter } from 'connected-react-router'
@@ -27,6 +28,7 @@ ReactDOM.render(
         <Route exact path="/" component={Example} />
         <Route exact path="/sfc" component={SFC} />
         <Route exact path="/hook" component={Hook} />
+        <Route exact path="/todo" component={Todo} />
         <Redirect to="/" />
       </Switch>
     </ConnectedRouter>

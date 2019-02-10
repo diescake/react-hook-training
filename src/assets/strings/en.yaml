@@ -11,3 +11,7 @@ hook:
 footer:
   back: Back
   forward: Forward
+todo:
+  name: todo
+  header: TODO App using React Hooks
+  add: Add

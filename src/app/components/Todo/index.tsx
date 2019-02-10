@@ -44,6 +44,13 @@ const toggleTargetDone = (id: string, todos: TODO[]) => {
   ]
 }
 
+const TODO = ({ todo, onChange }: { todo: TODO; onChange: any }) => (
+  <li>
+    <input type="checkbox" defaultChecked={todo.done} onChange={onChange} />
+    <span className={style.todoMessage}>{todo.message}</span>
+  </li>
+)
+
 export default () => {
   const [todos, setTodos] = useState<TODO[]>(initialTodos)
   const [todoMessage, setTodoMessage] = useState<string>('')
@@ -53,10 +60,7 @@ export default () => {
       <h1>{words.todo.header}</h1>
       <ul>
         {todos.map((todo: TODO) => (
-          <li key={key(todo)}>
-            <input onChange={() => setTodos(toggleTargetDone(todo.id, todos))} type="checkbox" defaultChecked={todo.done} />
-            <span className={style.todoMessage}>{todo.message}</span>
-          </li>
+          <TODO key={key(todo)} todo={todo} onChange={() => setTodos(toggleTargetDone(todo.id, todos))} />
         ))}
       </ul>
       <input

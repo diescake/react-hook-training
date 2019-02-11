@@ -97,7 +97,11 @@ export default () => {
 
   return (
     <div className={style.container}>
-      <h1>{words.todo.header}</h1>
+      <h1 className={style.header}>
+        <a href="https://github.com/diescake/react-hook-training/blob/master/src/app/components/Todo/index.tsx">
+          {words.todo.header}
+        </a>
+      </h1>
       <ul>
         {state.map((todo: TODO) => (
           <TODO key={key(todo)} todo={todo} onChange={() => dispatch({ type: 'TOGGLE_CHECKBOX', id: todo.id })} />
@@ -108,7 +112,7 @@ export default () => {
         className={style.inputTodo}
         type="text"
         value={message}
-        placeholder="Enter new TODO message."
+        placeholder={words.todo.placeholder}
         onChange={(e: any) => setMessage(e.target.value)}
         onKeyPress={(event: any) => event.key === 'Enter' && addTodo()}
       />

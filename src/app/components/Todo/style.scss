@@ -1,14 +1,21 @@
 .container {
-  padding: 10px 20px;
+  padding: 10px 50px 20px;
   line-height: 1.8;
+}
+
+.header {
+  font-size: 5.5rem;
 }
 
 .todoMessage {
   margin-left: 10px;
+  font-size: 2rem;
+  line-height: 0.3;
 }
 
 .inputTodo {
   padding-left: 8px;
-  margin: 0 5px 0 64px;
+  margin: 30px 5px 0 0;
   width: 400px;
+  font-size: 2rem;
 }
